@@ -39,7 +39,6 @@ export class LandingPage extends React.Component {
             placeholder="TYPE YOUR NAME"
             type="text"
             onChange={this.onPlayerNameChange}
-            value={this.state.playerName}
           />
           <select
             placeholder="DIFFICULTY LEVEL"
