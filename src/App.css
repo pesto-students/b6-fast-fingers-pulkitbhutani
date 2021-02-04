@@ -1,10 +1,24 @@
 .App {
+  margin: auto;
   text-align: center;
+  align-content: center;
+  object-position: center;
+  vertical-align: middle;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+body {
+  background-image: url("images/bg1.png");
+  background-color: #cccccc;
+ }
+
+ .text {
+  color: #ff5155;
+  margin: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {

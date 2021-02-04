@@ -1,0 +1,27 @@
+.score-list {
+    list-style-type: none;
+    border: 1px solid #ff5155;
+    margin: 0;
+    padding: 0;
+  }
+
+  li{
+    display:table;
+    margin: auto;
+  }
+
+  .score-list-li{
+      color: white;
+      font-size: x-large;
+      margin: 15px;
+  }
+  
+  .best-score-text{
+    font-size: small;
+    margin: 0;
+  }
+
+  .score-board-text{
+    margin-top: 25px;
+      margin-bottom: 25px;
+  }

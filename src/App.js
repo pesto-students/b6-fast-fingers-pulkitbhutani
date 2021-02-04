@@ -9,24 +9,29 @@ class App extends React.Component {
     this.state = {
       playerName: "",
       difficultyLevel: "",
+      currentScore: 0,
+      scoreList: [],
     };
   }
 
-  handleCallback = (stateData) => {
+  handleCallback = (stateData, gameModeStatus) => {
     this.setState(stateData);
+    this.setState({ gameMode: gameModeStatus });
   };
 
   render() {
     if (this.state.playerName === "") {
       return (
         <div className="App">
-          <LandingPage parentCallBack = {this.handleCallback}/>
+          <LandingPage parentCallBack={this.handleCallback} />
         </div>
       );
-    } else {
+    } else if (
+      this.state.gameMode === true
+    ) {
       return (
         <div className="App">
-          <Game stateData = {this.state}/>
+          <Game stateData={this.state} parentCallBack={this.handleCallback} />
         </div>
       );
     }

@@ -1,5 +1,10 @@
 import React from "react";
 import data from "../../data/dictionary.json";
+import Result from "../Result";
+import ScoreList from "../ScoreList";
+import personImg from "../../images/icons/person.png";
+import gamePadImg from "../../images/icons/gamepad.png";
+import "./Game.css";
 
 const easyWords = [];
 const mediumWords = [];
@@ -17,10 +22,13 @@ export class Game extends React.Component {
       scoreList: [],
       timerSeconds: 0,
       timerMiliseconds: 0,
+      resultMode: false,
     };
   }
 
   componentDidMount() {
+    console.log(this.state);
+    this.setInitialDifficultyFactor();
     this.populateWordLists();
     //this.loadWord();
     let newWord = this.loadNewWord();
@@ -28,7 +36,11 @@ export class Game extends React.Component {
     this.startScoreTimer();
   }
 
-  
+  setInitialDifficultyFactor() {
+    const difficultyLevel = this.state.difficultyLevel;
+    if (difficultyLevel === "medium") this.setState({ difficultyFactor: 1.5 });
+    if (difficultyLevel === "hard") this.setState({ difficultyFactor: 2 });
+  }
 
   startTimer(newWord) {
     const difficultyFactor = this.state.difficultyFactor;
@@ -51,11 +63,9 @@ export class Game extends React.Component {
       if (miliseconds === 0) {
         if (seconds === 0) {
           clearInterval(this.timerID);
-          this.setState((state) => {
-            state.scoreList.push(this.state.currentScore);
-           });
           clearInterval(this.scoreTimer);
-          console.log(this.state.currentScore);
+          this.addToScoreBoard(this.state.currentScore);
+          console.log(this.state);
         } else {
           this.setState({
             timerSeconds: seconds - 1,
@@ -63,14 +73,35 @@ export class Game extends React.Component {
           });
         }
       }
-    }, 20);
+    }, 16.6);
   }
 
-  addToScoreBoard = (currentScore) => {
-    
+  addToScoreBoard(currentScore) {
+    console.log("push score");
+    let scoreListItem;
+
+    if (this.state.scoreList.length === 0) {
+      scoreListItem = {
+        id: 1,
+        score: currentScore,
+      };
+    } else {
+      scoreListItem = {
+        id: this.state.scoreList.length + 1,
+        score: currentScore,
+      };
+    }
+    this.setState(
+      { scoreList: [...this.state.scoreList, scoreListItem] },
+      this.showResult()
+    );
   }
 
   startScoreTimer() {
+    this.setState({ currentScore: 0 }, this.startScoreTimeLog());
+  }
+
+  startScoreTimeLog() {
     this.scoreTimer = setInterval(() => {
       this.setState({
         currentScore: this.state.currentScore + 1,
@@ -141,9 +172,12 @@ export class Game extends React.Component {
     console.log(currentDifficultyFactor);
     if (currentDifficultyFactor < 1.5) {
       this.setState({ difficultyLevel: "easy" });
-    } else if (currentDifficultyFactor >= 1.5) {
+    } else if (
+      currentDifficultyFactor >= 1.5 &&
+      currentDifficultyFactor < 2.0
+    ) {
       this.setState({ difficultyLevel: "medium" });
-    } else {
+    } else if (currentDifficultyFactor >= 2) {
       this.setState({ difficultyLevel: "hard" });
     }
   }
@@ -161,22 +195,100 @@ export class Game extends React.Component {
     );
   }
 
+  showResult = () => {
+    console.log("push score" + this.state.scoreList);
+    this.setState({ resultMode: true });
+  };
+
+  onPlayAgain = () => {
+    this.setState({ resultMode: false }, this.componentDidMount);
+  };
+
+  addZeroForSingleDigit(num) {
+    return num < 10 ? "0" + num : num;
+  }
+
+  checkForBestScore(score) {
+    const maxScore = Math.max(...this.state.scoreList);
+    if (maxScore === score) {
+      return "PERSONAL BEST";
+    } else return "";
+  }
+
   render() {
+    let innerComponent;
+    let scoreComponent;
+    let scoreListComponent;
+    const playerName = this.props.stateData.playerName.toUpperCase();
+    const difficultyLevel = this.state.difficultyLevel.toUpperCase();
+    const currentScore = this.state.currentScore;
+    const scoreList = this.state.scoreList;
+    const currentWord = this.state.currentWord;
+    const timerSeconds = this.state.timerSeconds;
+    const timerMiliseconds = this.state.timerMiliseconds;
+
+    if (!this.state.resultMode) {
+      innerComponent = (
+        <div>
+          <h1 className="countdown-timer">
+            {this.addZeroForSingleDigit(timerSeconds)}:
+            {this.addZeroForSingleDigit(timerMiliseconds)}
+          </h1>
+
+          <h1 className="current-word">{currentWord}</h1>
+          <input
+            className="input-word"
+            type="text"
+            onChange={this.onWordInput}
+          />
+        </div>
+      );
+
+      scoreComponent = (
+        <h3 className="text">
+          SCORE: {Math.floor(currentScore / 60)}:{currentScore % 60}
+        </h3>
+      );
+
+      scoreListComponent = (
+        <ScoreList scoreListData={scoreList} key={scoreList.id} />
+      );
+    } else {
+      innerComponent = (
+        <div>
+          <Result currentScore={currentScore}/>
+          <button onClick={this.onPlayAgain}>Play Again</button>
+          <button onClick={this.onPlayAgain}>Quit</button>
+        </div>
+      );
+    }
+
     return (
-      <div>
-        <h1>Lets play</h1>
-        <h2>Score Board - {this.state.scoreList[0]} and {this.state.scoreList[1]}</h2>
-        <h2>
-          Total Score - {Math.floor(this.state.currentScore / 60)} :{" "}
-          {this.state.currentScore % 60}{" "}
-        </h2>
-        Player Name - {this.props.stateData.playerName}
-        Level : {this.state.difficultyLevel}
-        <h1>
-          {this.state.timerSeconds} : {this.state.timerMiliseconds}
-        </h1>
-        <h1>{this.state.currentWord}</h1>
-        <input type="text" onChange={this.onWordInput} />
+      <div className="game-container">
+        <div class="row">
+          <div class="col text-left">
+            <h3 className="text">
+              <img class="person-icon" src={personImg} alt=""></img>{" "}
+              {playerName}
+            </h3>
+          </div>
+          <div class="col offset-md-4 text-right">
+            <h3 className="text">fast fingers</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-left">
+            <h3 className="text">
+              <img class="gamepad-icon" src={gamePadImg} alt=""></img> LEVEL :{" "}
+              {difficultyLevel}
+            </h3>
+          </div>
+          <div class="col text-right">{scoreComponent}</div>
+        </div>
+        <div className="row row-m-t-b">
+          <div className="col-3">{scoreListComponent}</div>
+          <div className="col-6">{innerComponent}</div>
+        </div>
       </div>
     );
   }
