@@ -5,7 +5,6 @@ import ScoreList from "../ScoreList";
 import personImg from "../../images/icons/person.png";
 import reloadImg from "../../images/icons/reload.png";
 import gamePadImg from "../../images/icons/gamepad.png";
-import crossImg from "../../images/icons/cross.png";
 import "./Game.css";
 
 const easyWords = [];
