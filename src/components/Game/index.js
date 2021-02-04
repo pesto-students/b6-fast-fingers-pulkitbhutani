@@ -5,6 +5,7 @@ import ScoreList from "../ScoreList";
 import personImg from "../../images/icons/person.png";
 import reloadImg from "../../images/icons/reload.png";
 import gamePadImg from "../../images/icons/gamepad.png";
+import crossImg from "../../images/icons/cross.png";
 import "./Game.css";
 
 const easyWords = [];
@@ -253,6 +254,7 @@ export class Game extends React.Component {
 
       scoreComponent = (
         <h3 className="text">
+          <img class="gamepad-icon" src={gamePadImg} alt=""></img>
           SCORE: {Math.floor(currentScore / 60)}:{this.addZeroForSingleDigit(currentScore % 60)}
         </h3>
       );
@@ -260,6 +262,7 @@ export class Game extends React.Component {
       scoreListComponent = (
         <ScoreList scoreListData={scoreList} key={scoreList.id} />
       );
+
     } else {
       innerComponent = (
         <div>
