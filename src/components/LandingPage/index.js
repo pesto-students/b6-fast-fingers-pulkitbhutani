@@ -8,7 +8,9 @@ export class LandingPage extends React.Component {
     super(props);
     this.state = {
       playerName: "",
-      difficultyLevel: "",
+      difficultyLevel: "default",
+      playerNameError: "",
+      difficultyLevelError: "",
     };
   }
 
@@ -19,6 +21,22 @@ export class LandingPage extends React.Component {
     });
   };
 
+  validateInput = () => {
+    let playerNameError = "";
+    let difficultyLevelError = "";
+    if (this.state.playerName.length === 0) {
+      playerNameError = "PLEASE ENTER YOUR NAME.";
+      this.setState({ playerNameError });
+      return false;
+    }
+    if(this.state.difficultyLevel === 'default'){
+      difficultyLevelError = "PLEASE SELECT A DIFFICULTY LEVEL";
+      this.setState({difficultyLevelError});
+      return false;
+    }
+    return true;
+  };
+
   setLevel = (event) => {
     const value = event.target.value;
     this.setState({
@@ -26,14 +44,22 @@ export class LandingPage extends React.Component {
     });
   };
 
-  onTrigger = (event) => {
+  startGame = (event) => {
+    const isValid = this.validateInput();
     const gameModeStatus = true;
 
-    this.props.parentCallBack(this.state, gameModeStatus);
+    if (isValid) {
+      this.props.parentCallBack(this.state, gameModeStatus);
+    }
+
     event.preventDefault();
   };
 
   render() {
+
+    const playerNameError = this.state.playerNameError;
+    const difficultyLevelError = this.state.difficultyLevelError;
+
     return (
       <div>
         <div className="title-div">
@@ -44,7 +70,7 @@ export class LandingPage extends React.Component {
           ></img>
           <h1 className="text">Fast Fingers</h1>
         </div>
-        <form onSubmit={this.onTrigger}>
+        <form onSubmit={this.startGame}>
           <div>
             <div className="col align-self-center">
               <input
@@ -54,6 +80,7 @@ export class LandingPage extends React.Component {
                 type="text"
                 onChange={this.onPlayerNameChange}
               />
+              <div className="input-error">{playerNameError}</div>
               <select
                 className="select-level"
                 placeholder="DIFFICULTY LEVEL"
@@ -61,13 +88,14 @@ export class LandingPage extends React.Component {
                 value={this.state.difficultyLevel}
                 onChange={this.setLevel}
               >
-                <option value="" disabled>
+                <option value="default" disabled>
                   DIFFICULTY LEVEL
                 </option>
                 <option value="easy">EASY</option>
                 <option value="medium">MEDIUM</option>
                 <option value="hard">HARD</option>
               </select>
+              <div className="input-error">{difficultyLevelError}</div>
             </div>
           </div>
           <div>

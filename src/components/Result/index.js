@@ -25,10 +25,15 @@ export class Result extends React.Component {
     } else return "";
   }
 
+  addZeroForSingleDigit(num) {
+    return num < 10 ? "0" + num : num;
+  }
+
   render() {
     const currentScore = this.state.currentScore;
 
-    return (<p className="score-view">SCORE :{currentScore}</p>);
+    return (<p className="score-view">SCORE : {Math.floor(currentScore / 60)}:{this.addZeroForSingleDigit(currentScore % 60)}</p>);
+    
   }
 }
 

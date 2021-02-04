@@ -216,6 +216,12 @@ export class Game extends React.Component {
     } else return "";
   }
 
+  endGame = (event) => {
+    const gameModeStatus = false;
+    this.props.parentCallBack(this.state, gameModeStatus);
+    event.preventDefault();
+  };
+
   render() {
     let innerComponent;
     let scoreComponent;
@@ -247,7 +253,7 @@ export class Game extends React.Component {
 
       scoreComponent = (
         <h3 className="text">
-          SCORE: {Math.floor(currentScore / 60)}:{currentScore % 60}
+          SCORE: {Math.floor(currentScore / 60)}:{this.addZeroForSingleDigit(currentScore % 60)}
         </h3>
       );
 
@@ -257,9 +263,14 @@ export class Game extends React.Component {
     } else {
       innerComponent = (
         <div>
-          <Result currentScore={currentScore}/>
-          <button onClick={this.onPlayAgain} className="btn-start-game"><img className="icon-reload" src={reloadImg} alt="" />PLAY AGAIN</button>
-          <button onClick={this.onPlayAgain} className="btn-start-game">QUIT</button>
+          <Result currentScore={currentScore} />
+          <button onClick={this.onPlayAgain} className="btn-start-game">
+            <img className="icon-reload" src={reloadImg} alt="" />
+            PLAY AGAIN
+          </button>
+          <button onClick={this.endGame} className="btn-start-game">
+            QUIT
+          </button>
         </div>
       );
     }

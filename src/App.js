@@ -11,6 +11,7 @@ class App extends React.Component {
       difficultyLevel: "",
       currentScore: 0,
       scoreList: [],
+      gameMode :false 
     };
   }
 
@@ -20,7 +21,7 @@ class App extends React.Component {
   };
 
   render() {
-    if (this.state.playerName === "") {
+    if (this.state.gameMode === false) {
       return (
         <div className="App">
           <LandingPage parentCallBack={this.handleCallback} />
