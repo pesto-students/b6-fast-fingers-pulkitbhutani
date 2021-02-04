@@ -3,6 +3,7 @@ import data from "../../data/dictionary.json";
 import Result from "../Result";
 import ScoreList from "../ScoreList";
 import personImg from "../../images/icons/person.png";
+import reloadImg from "../../images/icons/reload.png";
 import gamePadImg from "../../images/icons/gamepad.png";
 import "./Game.css";
 
@@ -257,8 +258,8 @@ export class Game extends React.Component {
       innerComponent = (
         <div>
           <Result currentScore={currentScore}/>
-          <button onClick={this.onPlayAgain}>Play Again</button>
-          <button onClick={this.onPlayAgain}>Quit</button>
+          <button onClick={this.onPlayAgain} className="btn-start-game"><img className="icon-reload" src={reloadImg} alt="" />PLAY AGAIN</button>
+          <button onClick={this.onPlayAgain} className="btn-start-game">QUIT</button>
         </div>
       );
     }
