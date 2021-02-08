@@ -1,6 +1,8 @@
 import React from "react";
 import keyboardImg from "../../images/icons/keyboard.png";
 import playImg from "../../images/icons/play.png";
+import {difficulties }from "../../utility/constants";
+
 import "./LandingPage.css";
 
 export class LandingPage extends React.Component {
@@ -8,9 +10,8 @@ export class LandingPage extends React.Component {
     super(props);
     this.state = {
       playerName: "",
-      difficultyLevel: "default",
-      playerNameError: "",
-      difficultyLevelError: "",
+      difficultyLevel: "easy",
+      playerNameError: ""
     };
   }
 
@@ -23,15 +24,9 @@ export class LandingPage extends React.Component {
 
   validateInput = () => {
     let playerNameError = "";
-    let difficultyLevelError = "";
     if (this.state.playerName.length === 0) {
       playerNameError = "PLEASE ENTER YOUR NAME.";
       this.setState({ playerNameError });
-      return false;
-    }
-    if(this.state.difficultyLevel === 'default'){
-      difficultyLevelError = "PLEASE SELECT A DIFFICULTY LEVEL";
-      this.setState({difficultyLevelError});
       return false;
     }
     return true;
@@ -88,12 +83,7 @@ export class LandingPage extends React.Component {
                 value={this.state.difficultyLevel}
                 onChange={this.setLevel}
               >
-                <option value="default" disabled>
-                  DIFFICULTY LEVEL
-                </option>
-                <option value="easy">EASY</option>
-                <option value="medium">MEDIUM</option>
-                <option value="hard">HARD</option>
+                {difficulties.map(({label,value}) => <option value={value}>{label}</option>)}
               </select>
               <div className="input-error">{difficultyLevelError}</div>
             </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import data from "../../data/dictionary.json";
-import Result from "../Result";
-import ScoreList from "../ScoreList";
+import Result from "../Result/Result";
+import ScoreList from "../ScoreList/ScoreList";
+import Header from "../Header/Header";
+import GameTimer from "../GameTimer/GameTimer";
 import personImg from "../../images/icons/person.png";
 import reloadImg from "../../images/icons/reload.png";
 import gamePadImg from "../../images/icons/gamepad.png";
@@ -27,6 +29,7 @@ export class Game extends React.Component {
     };
   }
 
+
   componentDidMount() {
     console.log(this.state);
     this.setInitialDifficultyFactor();
@@ -41,6 +44,14 @@ export class Game extends React.Component {
     const difficultyLevel = this.state.difficultyLevel;
     if (difficultyLevel === "medium") this.setState({ difficultyFactor: 1.5 });
     if (difficultyLevel === "hard") this.setState({ difficultyFactor: 2 });
+  }
+
+  populateWordLists() {
+    for (let word of data) {
+      if (word.length <= 4) easyWords.push(word);
+      else if (word.length >= 5 && word.length <= 8) mediumWords.push(word);
+      else if (word.length > 8) hardWords.push(word);
+    }
   }
 
   startTimer(newWord) {
@@ -60,7 +71,6 @@ export class Game extends React.Component {
           timerMiliseconds: miliseconds - 1,
         });
       }
-
       if (miliseconds === 0) {
         if (seconds === 0) {
           clearInterval(this.timerID);
@@ -126,13 +136,7 @@ export class Game extends React.Component {
     });
   }
 
-  populateWordLists() {
-    for (let word of data) {
-      if (word.length <= 4) easyWords.push(word);
-      else if (word.length >= 5 && word.length <= 8) mediumWords.push(word);
-      else if (word.length > 8) hardWords.push(word);
-    }
-  }
+ 
 
   loadNewWord() {
     const difficultyLevel = this.state.difficultyLevel;
@@ -226,8 +230,7 @@ export class Game extends React.Component {
     let innerComponent;
     let scoreComponent;
     let scoreListComponent;
-    const playerName = this.props.stateData.playerName.toUpperCase();
-    const difficultyLevel = this.state.difficultyLevel.toUpperCase();
+
     const currentScore = this.state.currentScore;
     const scoreList = this.state.scoreList;
     const currentWord = this.state.currentWord;
@@ -241,7 +244,7 @@ export class Game extends React.Component {
             {this.addZeroForSingleDigit(timerSeconds)}:
             {this.addZeroForSingleDigit(timerMiliseconds)}
           </h1>
-
+         
           <h1 className="current-word">{currentWord}</h1>
           <input
             className="input-word"
@@ -258,9 +261,7 @@ export class Game extends React.Component {
         </h3>
       );
 
-      scoreListComponent = (
-        <ScoreList scoreListData={scoreList} key={scoreList.id} />
-      );
+  
 
     } else {
       innerComponent = (
@@ -279,28 +280,9 @@ export class Game extends React.Component {
 
     return (
       <div className="game-container">
-        <div class="row">
-          <div class="col text-left">
-            <h3 className="text">
-              <img class="person-icon" src={personImg} alt=""></img>{" "}
-              {playerName}
-            </h3>
-          </div>
-          <div class="col offset-md-4 text-right">
-            <h3 className="text">fast fingers</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col text-left">
-            <h3 className="text">
-              <img class="gamepad-icon" src={gamePadImg} alt=""></img> LEVEL :{" "}
-              {difficultyLevel}
-            </h3>
-          </div>
-          <div class="col text-right">{scoreComponent}</div>
-        </div>
+       <Header headerData = {{playerName : this.state.playerName, difficulty : this.state.difficultyLevel, score: this.state.currentScore}} />
         <div className="row row-m-t-b">
-          <div className="col-3">{scoreListComponent}</div>
+          <div className="col-3"><ScoreList scoreListData={scoreList} key={scoreList.id} /></div>
           <div className="col-6">{innerComponent}</div>
         </div>
       </div>

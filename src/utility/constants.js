@@ -1,0 +1,1 @@
+export const difficulties = [{value:'easy', label: 'EASY'}, {value:'medium', label: 'MEDIUM'}, {value:'hard', label: 'HARD'}]
