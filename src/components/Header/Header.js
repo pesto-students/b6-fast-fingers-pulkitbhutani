@@ -3,13 +3,12 @@ import gamePadImg from "../../images/icons/gamepad.png";
 import personImg from "../../images/icons/person.png";
 
 export class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        
-    };
+
+  addZeroForSingleDigit(num) {
+    return num < 10 ? "0" + num : num;
   }
 
+  
   render() {
     return (
       <div>
@@ -31,7 +30,13 @@ export class Header extends React.Component {
               {this.props.headerData.difficulty}
             </h3>
           </div>
-          <div class="col text-right">{this.props.headerData.score}</div>
+          <div class="col text-right">
+            <h3 className="text">
+              <img class="gamepad-icon" src={gamePadImg} alt=""></img>
+              SCORE: {Math.floor(this.props.headerData.score / 60)}:
+              {this.addZeroForSingleDigit(this.props.headerData.score % 60)}
+            </h3>
+          </div>
         </div>
       </div>
     );

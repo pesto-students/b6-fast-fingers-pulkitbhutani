@@ -2,20 +2,10 @@ import React from "react";
 import "./ScoreList.css";
 
 export class ScoreList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      scoreList: this.props.scoreListData,
-    };
-
-    
-  }
-
-  componentWillReceiveProps(){this.setState({scoreList: this.props.scoreListData});}
-
+  
   checkForBestScore(score) {
     //const maxScore = Math.max(...this.state.scoreList.score);
-    const maxScore = Math.max.apply(Math, this.state.scoreList.map(function(o) { return o.score; }))
+    const maxScore = Math.max.apply(Math, this.props.scoreListData.map(function(o) { return o.score; }))
     if (maxScore === score) {
       return "PERSONAL BEST";
     } else return "";
@@ -27,10 +17,9 @@ export class ScoreList extends React.Component {
 
   render() {
     let scoreListComponent;
-    let scoreList = this.state.scoreList;
 
-    if (scoreList) {
-      scoreListComponent = scoreList.map((scoreItem) => (
+    if (this.props.scoreListData) {
+      scoreListComponent = this.props.scoreListData.map((scoreItem) => (
         <li key={scoreItem.id} className= "score-list-li">
           <p className="best-score-text text">{this.checkForBestScore(scoreItem.score)}</p>
           {"Game " +

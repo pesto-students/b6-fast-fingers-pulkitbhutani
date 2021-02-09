@@ -209,17 +209,6 @@ export class Game extends React.Component {
     this.setState({ resultMode: false }, this.componentDidMount);
   };
 
-  addZeroForSingleDigit(num) {
-    return num < 10 ? "0" + num : num;
-  }
-
-  checkForBestScore(score) {
-    const maxScore = Math.max(...this.state.scoreList);
-    if (maxScore === score) {
-      return "PERSONAL BEST";
-    } else return "";
-  }
-
   endGame = (event) => {
     const gameModeStatus = false;
     this.props.parentCallBack(this.state, gameModeStatus);
@@ -228,23 +217,13 @@ export class Game extends React.Component {
 
   render() {
     let innerComponent;
-    let scoreComponent;
-    let scoreListComponent;
 
-    const currentScore = this.state.currentScore;
-    const scoreList = this.state.scoreList;
-    const currentWord = this.state.currentWord;
-    const timerSeconds = this.state.timerSeconds;
-    const timerMiliseconds = this.state.timerMiliseconds;
+    const {currentScore, scoreList, currentWord, timerSeconds, timerMiliseconds} = this.state;
 
     if (!this.state.resultMode) {
       innerComponent = (
         <div>
-          <h1 className="countdown-timer">
-            {this.addZeroForSingleDigit(timerSeconds)}:
-            {this.addZeroForSingleDigit(timerMiliseconds)}
-          </h1>
-         
+         <GameTimer timerSeconds = {timerSeconds} timerMiliseconds = {timerMiliseconds}/>
           <h1 className="current-word">{currentWord}</h1>
           <input
             className="input-word"
@@ -253,15 +232,6 @@ export class Game extends React.Component {
           />
         </div>
       );
-
-      scoreComponent = (
-        <h3 className="text">
-          <img class="gamepad-icon" src={gamePadImg} alt=""></img>
-          SCORE: {Math.floor(currentScore / 60)}:{this.addZeroForSingleDigit(currentScore % 60)}
-        </h3>
-      );
-
-  
 
     } else {
       innerComponent = (

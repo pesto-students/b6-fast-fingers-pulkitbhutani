@@ -2,13 +2,9 @@ import React from "react";
 import "./GameTimer.css";
 
 export class GameTimer extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = this.props.stateData;
-    }
 
     componentDidMount() {
-        this.startTimer(this.state.currentWord);
+        //this.startTimer(this.state.currentWord);
       }
 
 
@@ -62,14 +58,16 @@ export class GameTimer extends React.Component {
         });
       }
 
+      addZeroForSingleDigit(num) {
+        return num < 10 ? "0" + num : num;
+      }
+
     render() {
-        const timerSeconds = this.state.timerSeconds;
-        const timerMiliseconds = this.state.timerMiliseconds;
 
         return (<div>
             <h1 className="countdown-timer">
-              {this.addZeroForSingleDigit(timerSeconds)}:
-              {this.addZeroForSingleDigit(timerMiliseconds)}
+              {this.addZeroForSingleDigit(this.props.timerSeconds)}:
+              {this.addZeroForSingleDigit(this.props.timerMiliseconds)}
             </h1>
             </div>)
     }
