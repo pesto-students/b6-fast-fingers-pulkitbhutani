@@ -5,38 +5,6 @@ import Game from "./components/Game/Game";
 import { DIFFICULTY_LEVELS } from "./utility/constants";
 import LandingPage from "./components/LandingPage/LandingPage";
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       playerName: "",
-//       difficultyLevel: "",
-//       gameMode: false,
-//     };
-//   }
-
-//   handleCallback = (stateData, gameModeStatus) => {
-//     this.setState(stateData);
-//     this.setState({ gameMode: gameModeStatus });
-//   };
-
-//   render() {
-//     if (this.state.gameMode === false) {
-//       return (
-//         <div className="App">
-//           <LandingPage parentCallBack={this.handleCallback} />
-//         </div>
-//       );
-//     } else if (this.state.gameMode === true) {
-//       return (
-//         <div className="App">
-//           <Game stateData={this.state} parentCallBack={this.handleCallback} />
-//         </div>
-//       );
-//     }
-//   }
-// }
-
 export default function App() {
   const [playerName, setPlayerName] = useState("");
   const [gameMode, setGameMode] = useState(false);

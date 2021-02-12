@@ -260,4 +260,8 @@ export class Game extends React.Component {
   }
 }
 
+/* const Game = ({playerName, setPlayerName, gameMode, setGameMode, difficultyLevel, setDifficultyLevel})=> {
+ 
+}
+ */
 export default Game;
