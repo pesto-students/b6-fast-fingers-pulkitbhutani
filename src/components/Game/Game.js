@@ -4,9 +4,8 @@ import Result from "../Result/Result";
 import ScoreList from "../ScoreList/ScoreList";
 import Header from "../Header/Header";
 import GameTimer from "../GameTimer/GameTimer";
-import personImg from "../../images/icons/person.png";
 import reloadImg from "../../images/icons/reload.png";
-import gamePadImg from "../../images/icons/gamepad.png";
+import { DIFFICULTY_LEVELS, DIFFICULTY_CONFIG, DIFFICULTY_FACTOR_INCREASE_RATE }from "../../utility/constants";
 import "./Game.css";
 
 const easyWords = [];
@@ -17,9 +16,9 @@ export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerName: this.props.stateData.playerName,
-      difficultyLevel: this.props.stateData.difficultyLevel,
-      difficultyFactor: 1,
+      playerName: this.props.playerName,
+      difficultyLevel: this.props.difficultyLevel,
+      difficultyFactor: DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.EASY].factor,
       currentWord: "",
       currentScore: 0,
       scoreList: [],
@@ -42,8 +41,8 @@ export class Game extends React.Component {
 
   setInitialDifficultyFactor() {
     const difficultyLevel = this.state.difficultyLevel;
-    if (difficultyLevel === "medium") this.setState({ difficultyFactor: 1.5 });
-    if (difficultyLevel === "hard") this.setState({ difficultyFactor: 2 });
+    if (difficultyLevel === DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.MEDIUM].value) this.setState({ difficultyFactor: DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.MEDIUM].factor });
+    if (difficultyLevel === DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.HARD].value) this.setState({ difficultyFactor: DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.HARD].factor });
   }
 
   populateWordLists() {
@@ -140,11 +139,11 @@ export class Game extends React.Component {
 
   loadNewWord() {
     const difficultyLevel = this.state.difficultyLevel;
-    if (difficultyLevel === "easy") {
+    if (difficultyLevel === DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.EASY].value) {
       return easyWords[
         Math.floor(Math.random() * easyWords.length)
       ].toUpperCase();
-    } else if (difficultyLevel === "medium") {
+    } else if (difficultyLevel === DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.MEDIUM].value) {
       return mediumWords[
         Math.floor(Math.random() * mediumWords.length)
       ].toUpperCase();
@@ -175,15 +174,15 @@ export class Game extends React.Component {
   updateDifficultyLevel() {
     const currentDifficultyFactor = this.state.difficultyFactor;
     console.log(currentDifficultyFactor);
-    if (currentDifficultyFactor < 1.5) {
-      this.setState({ difficultyLevel: "easy" });
+    if (currentDifficultyFactor < DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.MEDIUM].factor) {
+      this.setState({ difficultyLevel: DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.EASY].value });
     } else if (
-      currentDifficultyFactor >= 1.5 &&
-      currentDifficultyFactor < 2.0
+      currentDifficultyFactor >= DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.MEDIUM].factor &&
+      currentDifficultyFactor < DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.HARD].factor
     ) {
-      this.setState({ difficultyLevel: "medium" });
-    } else if (currentDifficultyFactor >= 2) {
-      this.setState({ difficultyLevel: "hard" });
+      this.setState({ difficultyLevel: DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.MEDIUM].value });
+    } else if (currentDifficultyFactor >= DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.HARD].factor) {
+      this.setState({ difficultyLevel: DIFFICULTY_CONFIG[DIFFICULTY_LEVELS.HARD].value });
     }
   }
 
@@ -191,7 +190,7 @@ export class Game extends React.Component {
     this.setState(
       {
         difficultyFactor: +Number.parseFloat(
-          this.state.difficultyFactor + 0.01
+          this.state.difficultyFactor + DIFFICULTY_FACTOR_INCREASE_RATE
         ).toFixed(2),
       },
       function () {
@@ -211,14 +210,15 @@ export class Game extends React.Component {
 
   endGame = (event) => {
     const gameModeStatus = false;
-    this.props.parentCallBack(this.state, gameModeStatus);
+    this.props.setGameMode(gameModeStatus);
+    //this.props.parentCallBack(this.state, gameModeStatus);
     event.preventDefault();
   };
 
   render() {
     let innerComponent;
 
-    const {currentScore, scoreList, currentWord, timerSeconds, timerMiliseconds} = this.state;
+    const {currentScore, scoreList, currentWord, timerSeconds, timerMiliseconds, resultMode} = this.state;
 
     if (!this.state.resultMode) {
       innerComponent = (
