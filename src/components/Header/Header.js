@@ -1,6 +1,7 @@
 import React from "react";
 import gamePadImg from "../../images/icons/gamepad.png";
 import personImg from "../../images/icons/person.png";
+import {getDifficulty} from "../../utility/UtilityFunctions";
 
 export class Header extends React.Component {
 
@@ -12,29 +13,29 @@ export class Header extends React.Component {
   render() {
     return (
       <div>
-        <div class="row">
-          <div class="col text-left">
+        <div className="row">
+          <div className="col text-left">
             <h3 className="text">
-              <img class="person-icon" src={personImg} alt=""></img>{" "}
-              {this.props.headerData.playerName}
+              <img className="person-icon" src={personImg} alt=""></img>{" "}
+              {this.props.playerName}
             </h3>
           </div>
-          <div class="col offset-md-4 text-right">
+          <div className="col offset-md-4 text-right">
             <h3 className="text">fast fingers</h3>
           </div>
         </div>
-        <div class="row">
-          <div class="col text-left">
+        <div className="row">
+          <div className="col text-left">
             <h3 className="text">
-              <img class="gamepad-icon" src={gamePadImg} alt=""></img> LEVEL :{" "}
-              {this.props.headerData.difficulty}
+              <img className="gamepad-icon" src={gamePadImg} alt=""></img> LEVEL :{" "}
+              {getDifficulty(this.props.difficultyLevel).toUpperCase()}
             </h3>
           </div>
-          <div class="col text-right">
+          <div className="col text-right">
             <h3 className="text">
-              <img class="gamepad-icon" src={gamePadImg} alt=""></img>
-              SCORE: {Math.floor(this.props.headerData.score / 60)}:
-              {this.addZeroForSingleDigit(this.props.headerData.score % 60)}
+              <img className="gamepad-icon" src={gamePadImg} alt=""></img>
+              SCORE: {Math.floor(this.props.score / 60)}:
+              {this.addZeroForSingleDigit(this.props.score % 60)}
             </h3>
           </div>
         </div>

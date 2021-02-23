@@ -27,6 +27,16 @@ body {
   }
 }
 
+.button-game {
+  background-color: transparent;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  color: #ff5155;
+  padding-right: 20px;
+  margin-top: 30px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -9,6 +9,12 @@ export const DIFFICULTY_LEVELS = {
     MEDIUM : 'medium',
     HARD : 'hard'
 };
+
+export const difficulties = [
+  {label:"Easy", value:1},
+  {label:"Medium", value:1.5},
+  {label:"Hard", value:2}
+]
   
 
 export const DIFFICULTY_CONFIG = {

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import keyboardImg from "../../images/icons/keyboard.png";
 import playImg from "../../images/icons/play.png";
-import {DIFFICULTY_LEVEL, PLAYER_NAME_ERROR }from "../../utility/constants";
+import {DIFFICULTY_LEVEL,difficulties, PLAYER_NAME_ERROR }from "../../utility/Constants";
 
 import "./LandingPage.css";
 
@@ -57,9 +57,9 @@ const LandingPage = ({playerName, setPlayerName, gameMode, setGameMode, difficul
               placeholder="DIFFICULTY LEVEL"
               name="difficulty-level"
               value={difficultyLevel}
-              onChange={({target : {value}}) => setDifficultyLevel(value)}
+              onChange={({target : {value}}) => {setDifficultyLevel(value);}}
             >
-              {DIFFICULTY_LEVEL.map(({label,value}) => <option value={value}>{label}</option>)}
+              {difficulties.map(({label,value}) => <option value={value}>{label}</option>)}
             </select>
           </div>
         </div>
