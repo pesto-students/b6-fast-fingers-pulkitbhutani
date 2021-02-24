@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getTimerValue,
   loadNewWord,
   getDifficulty,
 } from "../utility/UtilityFunctions";
 import {
-  difficulties,
   DIFFICULTY_FACTOR_INCREASE_RATE,
 } from "../utility/Constants";
 import useTimer from "./useTimer";
@@ -69,7 +68,8 @@ function useGame(initialDifficulty) {
     setResultMode(false);
     setStartTimer(true);
     setStartScoreTimer(true);
-    setCurrentWord(loadNewWord(getDifficulty(initialDifficulty)));
+    setDifficulty(initialDifficulty);
+    setCurrentWord(loadNewWord(getDifficulty(difficulty)));
   };
 
   const quitGame = () => {
