@@ -1,52 +1,50 @@
-  
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 
 function useTimer(value) {
-    const [startTimer, setStartTimer] = useState(false);
-    const [restartTimer, setRestartTimer] = useState(false);
+  const [startTimer, setStartTimer] = useState(false);
+  const [restartTimer, setRestartTimer] = useState(false);
 
-    const [seconds, setSeconds] = useState(value);
-    const [miliseconds, setMiliseconds] = useState(0);
+  const [seconds, setSeconds] = useState(value);
+  const [miliseconds, setMiliseconds] = useState(59);
 
-    let timer = useRef(null);
-    useEffect(() => {
-        console.log("before start timer" + seconds);
-        console.log("before start timer bool" + startTimer);
-        timer.current = startTimer
-          ? /* setInterval(() => {
-              if (miliseconds > 0) {
-                //setMiliseconds((m) => m - 1);
-              }
-              if (miliseconds === 0) {
-                setSeconds((s) => s - 1);
-                //setMiliseconds(59);
-              }
-            }, 1000) */
-            setInterval(() => setSeconds((prev) => prev - 1), 1000)
-          : null;
-          return () => clearInterval(timer.current);
-      }, [startTimer]);
+  let timer = useRef(null);
+  useEffect(() => {
+    console.log("before start timer" + miliseconds);
+    console.log("before start timer bool" + startTimer);
+    timer.current = startTimer
+      ? setInterval(() => setMiliseconds((prev) => prev - 1), 16.6)
+      : null;
+    return () => clearInterval(timer.current);
+  }, [startTimer]);
 
-    useEffect(() => {
-        if (seconds <= 0) {
-            clearInterval(timer.current);
-            setStartTimer(false);
-        }
-    }, [seconds])
-
-
-    useEffect(() => {
-      if (restartTimer){
-        setSeconds(value);
+  useEffect(() => {
+    if (seconds <= 0) {
+      clearInterval(timer.current);
+      setStartTimer(false);
     }
-      setRestartTimer(false);
-  }, [restartTimer,value])
+  }, [seconds]);
 
-    return {
-        seconds,
-        setStartTimer,
-        setRestartTimer
-    };
+  useEffect(() => {
+    if (miliseconds <= 0) {
+      setSeconds((s) => s - 1);
+      setMiliseconds(59);
+    }
+  }, [miliseconds]);
+
+  useEffect(() => {
+    if (restartTimer) {
+      setSeconds(value);
+      setMiliseconds(59);
+    }
+    setRestartTimer(false);
+  }, [restartTimer, value]);
+
+  return {
+    seconds,
+    miliseconds,
+    setStartTimer,
+    setRestartTimer,
+  };
 }
 
 export default useTimer;

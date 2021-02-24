@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import {addZeroForSingleDigit} from "../../utility/UtilityFunctions";
 import "./GameTimer.css";
 
-const GameTimer = ({ seconds }) => {
+const GameTimer = ({ seconds,miliseconds }) => {
 
 
   return (
     <div>
       <h1 className="countdown-timer">
-        {seconds}
+        {addZeroForSingleDigit(seconds)}:{miliseconds}
       </h1>
     </div>
   );

@@ -16,12 +16,12 @@ const Game = ({ playerName, setGameMode, difficultyLevel }) => {
   const {
     currentWord,
     seconds,
+    miliseconds,
     userInput,
     setUserInput,
     resultMode,
     score,
     restartGame,
-    quitGame,
     scoreList
   } = useGame(Number(difficultyLevel, setGameMode));
 
@@ -45,7 +45,7 @@ const Game = ({ playerName, setGameMode, difficultyLevel }) => {
             </div>
           ) : (
             <div>
-              <GameTimer seconds={seconds} />
+              <GameTimer seconds={seconds} miliseconds = {miliseconds} />
               <WordDisplay currentWord={currentWord} />
               <TextBox text={userInput} setText={setUserInput} />
             </div>

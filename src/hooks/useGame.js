@@ -17,7 +17,7 @@ function useGame(initialDifficulty) {
   const [resultMode, setResultMode] = useState(false);
   const [scoreList, setScoreList] = useState([]);
 
-  const { seconds, setStartTimer, setRestartTimer } = useTimer(
+  const { seconds,miliseconds, setStartTimer, setRestartTimer } = useTimer(
     getTimerValue(difficulty, currentWord)
   );
 
@@ -72,21 +72,15 @@ function useGame(initialDifficulty) {
     setCurrentWord(loadNewWord(getDifficulty(difficulty)));
   };
 
-  const quitGame = () => {
-    setResultMode(false);
-    setScore(0);
-    setStartScoreTimer(false);
-  }
-
   return {
     currentWord,
     seconds,
+    miliseconds,
     userInput,
     setUserInput,
     resultMode,
     score,
     restartGame,
-    quitGame,
     scoreList
   };
 }
