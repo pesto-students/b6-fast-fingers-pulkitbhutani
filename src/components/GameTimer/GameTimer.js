@@ -8,7 +8,7 @@ const GameTimer = ({ seconds,miliseconds }) => {
   return (
     <div>
       <h1 className="countdown-timer">
-        {addZeroForSingleDigit(seconds)}:{miliseconds}
+        {addZeroForSingleDigit(seconds)}:{addZeroForSingleDigit(miliseconds)}
       </h1>
     </div>
   );

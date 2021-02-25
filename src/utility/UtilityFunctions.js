@@ -44,6 +44,14 @@ export const getTimerValue = (difficultyLevel, currentWord) => {
 }
 
 
+export const checkIfHighestScore = (score, scoreList) => {
+  const maxScore = Math.max.apply(Math, scoreList.map(function(o) { return o.score; }))
+  if (maxScore === score) {
+    console.log('max score ' +maxScore);
+    return true;
+  } else return false;
+}
+
 
   
   
