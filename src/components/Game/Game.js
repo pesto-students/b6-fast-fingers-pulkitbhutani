@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams, Link } from "react-router-dom";
 import Result from "../Result/Result";
 import ScoreList from "../ScoreList/ScoreList";
 import Header from "../Header/Header";
@@ -11,7 +12,8 @@ import useGame from "../../hooks/useGame";
 
 import "./Game.css";
 
-const Game = ({ playerName, setGameMode, difficultyLevel }) => {
+const Game = () => {
+  const { playerName, difficultyLevel } = useParams();
 
   const {
     currentWord,
@@ -22,8 +24,8 @@ const Game = ({ playerName, setGameMode, difficultyLevel }) => {
     resultMode,
     score,
     restartGame,
-    scoreList
-  } = useGame(Number(difficultyLevel, setGameMode));
+    scoreList,
+  } = useGame(Number(difficultyLevel));
 
   return (
     <div className="game-container">
@@ -40,12 +42,18 @@ const Game = ({ playerName, setGameMode, difficultyLevel }) => {
           {resultMode ? (
             <div>
               <Result currentScore={score} />
-              <Button icon ={reloadImg} text={"PLAY AGAIN"} onClick = {() => restartGame()} />
-              <Button text={"QUIT"} onClick = {() => setGameMode(false)} />
+              <Button
+                icon={reloadImg}
+                text={"PLAY AGAIN"}
+                onClick={() => restartGame()}
+              />
+              <Link to="/">
+                <Button text={"QUIT"} />
+              </Link>
             </div>
           ) : (
             <div>
-              <GameTimer seconds={seconds} miliseconds = {miliseconds} />
+              <GameTimer seconds={seconds} miliseconds={miliseconds} />
               <WordDisplay currentWord={currentWord} />
               <TextBox text={userInput} setText={setUserInput} />
             </div>
