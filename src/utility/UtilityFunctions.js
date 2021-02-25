@@ -1,15 +1,16 @@
 import easyData from '../data/easy.json'
 import mediumData from '../data/medium.json'
 import hardData from '../data/hard.json'
+import {DIFFICULTY_LEVELS} from '../utility/Constants';
 
 
  export const loadNewWord = (difficultyLevel) => {
     switch (difficultyLevel) {
-        case 'easy' :
+        case DIFFICULTY_LEVELS.EASY :
             return easyData[Math.floor(Math.random() * easyData.length)].toUpperCase();
-        case 'medium' :
+        case DIFFICULTY_LEVELS.MEDIUM :
             return mediumData[Math.floor(Math.random() * mediumData.length)].toUpperCase();
-        case 'hard' :
+        case DIFFICULTY_LEVELS.HARD :
             return hardData[Math.floor(Math.random() * hardData.length)].toUpperCase();
         default :
             return easyData[Math.floor(Math.random() * easyData.length)].toUpperCase();
@@ -18,12 +19,12 @@ import hardData from '../data/hard.json'
 
 export const getDifficulty = (difficultyFactor)=>{
   if(difficultyFactor >=2 ){
-      return "hard";
+      return DIFFICULTY_LEVELS.HARD;
   }
   else if(difficultyFactor >=1.5){
-      return "medium";
+      return DIFFICULTY_LEVELS.MEDIUM;
   }
-  else return "easy"
+  else return DIFFICULTY_LEVELS.EASY
 }
 
 export const addZeroForSingleDigit = (num) => {
