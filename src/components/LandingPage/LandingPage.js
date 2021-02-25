@@ -25,17 +25,6 @@ const LandingPage = () => {
     return true;
   };
 
-  /* const startGame = () => {
-    const isValid = validateInput();
-    const gameModeStatus = true;
-
-    console.log(error);
-
-    if (isValid) {
-      setGameMode(gameModeStatus);
-    }
-  };
- */
   return (
     <div>
       <div className="title-div">
@@ -59,10 +48,11 @@ const LandingPage = () => {
           </div>
         </div>
         <div>
-          <Link to={`game/${playerName}/${difficultyLevel}`}>
+          <Link to={playerName !== '' ? (`game/${playerName}/${difficultyLevel}`) : '#' }>
             <Button
               icon={playImg}
               text={"START GAME"}
+              onClick={()=>validateInput() }
             />
           </Link> 
         </div>
