@@ -1,0 +1,12 @@
+
+.input-word {
+    width: 350px;
+    height: 50px;
+    border-radius: 10px;
+    opacity: 0.65;
+    padding-left: 22px;
+    margin-top: 20px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
