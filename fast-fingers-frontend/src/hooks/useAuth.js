@@ -1,4 +1,5 @@
 import { signIn, signUp } from "../services/authService";
+import {PLAYER_NAME_ERROR, PASSWORD_ERROR, USER_EXISTS_ERROR, INCORRECT_LOGIN_DETAILS_ERROR} from "../utility/Constants";
 
 function useAuth(
   username,
@@ -11,10 +12,10 @@ function useAuth(
 ) {
   const onSubmit = () => {
     if (username === "") {
-      setUsernameError("Please Enter a UserName");
+      setUsernameError(PLAYER_NAME_ERROR);
     }
     if (password === "") {
-      setPasswordError("Please Enter a Password");
+      setPasswordError(PASSWORD_ERROR);
     } else {
       performAuthAction();
     }
@@ -33,7 +34,7 @@ function useAuth(
             setSucessFlag(true);
             setSucessMessage("User Registered Sucessfully.");
           } else {
-            setUsernameError("UserName already Exists");
+            setUsernameError(USER_EXISTS_ERROR);
           }
         })
         .catch((error) => {
@@ -54,7 +55,7 @@ function useAuth(
             setPasswordError("");
             setSucessMessage("User details verified.");
           } else {
-            setUsernameError("Incorrect Login Details");
+            setUsernameError(INCORRECT_LOGIN_DETAILS_ERROR);
           }
         })
         .catch((error) => {
