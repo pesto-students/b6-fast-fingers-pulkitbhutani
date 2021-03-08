@@ -1,5 +1,5 @@
 import { signIn, signUp } from "../services/authService";
-import {PLAYER_NAME_ERROR, PASSWORD_ERROR, USER_EXISTS_ERROR, INCORRECT_LOGIN_DETAILS_ERROR} from "../utility/Constants";
+import {PLAYER_NAME_ERROR, PASSWORD_ERROR, USER_EXISTS_ERROR, INCORRECT_LOGIN_DETAILS_ERROR, USER_REGISTERED_SUCESS} from "../utility/Constants";
 
 function useAuth(
   username,
@@ -32,7 +32,7 @@ function useAuth(
             setUsernameError("");
             setPasswordError("");
             setSucessFlag(true);
-            setSucessMessage("User Registered Sucessfully.");
+            setSucessMessage(USER_REGISTERED_SUCESS);
           } else {
             setUsernameError(USER_EXISTS_ERROR);
           }
@@ -53,7 +53,6 @@ function useAuth(
             console.log("login good");
             setUsernameError("");
             setPasswordError("");
-            setSucessMessage("User details verified.");
           } else {
             setUsernameError(INCORRECT_LOGIN_DETAILS_ERROR);
           }

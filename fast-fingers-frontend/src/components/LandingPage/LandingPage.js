@@ -61,7 +61,7 @@ const LandingPage = () => {
             <Button
               icon={playImg}
               text={"LOGIN AND START GAME"}
-              onClick={()=>{onSubmit(); }}
+              onClick={()=>{onSubmit();}}
             />
           <ErrorView errorText={usenameError} />
           <Link to='/register'>

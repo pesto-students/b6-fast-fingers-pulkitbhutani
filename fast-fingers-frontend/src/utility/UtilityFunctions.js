@@ -19,12 +19,6 @@ import {DIFFICULTY_LEVELS} from '../utility/Constants';
     }
     } */
 
-    export const loadNewWord = (difficultyLevel) =>{
-      const getWordUrl = `http://localhost:3000/words/${difficultyLevel}`;
-      return fetch(getWordUrl).then(response => response.json())
-      .then(data =>{return data[0].words;});
-    }
-
 export const getDifficulty = (difficultyFactor)=>{
   if(difficultyFactor >=2 ){
       return DIFFICULTY_LEVELS.HARD;
