@@ -15,7 +15,7 @@ const ScoreList = ({ scoreListData }) => {
             <p className="best-score-text text">PERSONAL BEST</p>
           ) : null}
           {"Game " +
-             scoreItem.scoreId+
+             (scoreListData.indexOf(scoreItem)+1) +
             " : " +
             Math.floor(scoreItem.score / 60) +
             ":" +

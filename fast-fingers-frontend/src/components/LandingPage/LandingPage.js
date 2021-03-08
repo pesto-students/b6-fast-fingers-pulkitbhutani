@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import keyboardImg from "../../images/icons/keyboard.png";
 import playImg from "../../images/icons/play.png";
@@ -24,8 +24,15 @@ const LandingPage = () => {
   const [passwordError, setPasswordError] = useState();
   const [sucessFlag, setSucessFlag] = useState(false);
   const [sucessMessage, setSucessMessage] = useState();
+  const history = useHistory();
 
   const { onSubmit} = useAuth(username, password, setUsernameError ,setPasswordError,setSucessFlag, setSucessMessage, 'login');
+
+  useEffect(()=>{
+    if(sucessFlag){
+      history.push(`game/${username}/${difficultyLevel}`)
+    }
+  },[sucessFlag])
 
   return (
     <div>
@@ -37,7 +44,6 @@ const LandingPage = () => {
         ></img>
         <h1 className="text">Fast Fingers</h1>
       </div>
-      <form>
         <div>
           <div className="col align-self-center">
             <TextBox text={username} setText={setUsername} placeHolder = 'Enter UserName' />
@@ -52,13 +58,11 @@ const LandingPage = () => {
           </div>
         </div>
         <div> 
-          <Link to={sucessFlag ? (`game/${username}/${difficultyLevel}`) : '#' }>
             <Button
               icon={playImg}
               text={"LOGIN AND START GAME"}
-              onClick={()=>onSubmit()}
+              onClick={()=>{onSubmit(); }}
             />
-          </Link> 
           <ErrorView errorText={usenameError} />
           <Link to='/register'>
             <Button
@@ -67,7 +71,6 @@ const LandingPage = () => {
             />
           </Link> 
         </div>
-      </form>
     </div>
   );
 };

@@ -41,9 +41,9 @@ export const addZeroForSingleDigit = (num) => {
 
 
 export const getTimerValue = (difficultyLevel, currentWord) => {
-  
+  console.log('current length' + currentWord.length);
   let seconds = currentWord.length / difficultyLevel;
-
+  console.log('current length secs' + seconds);
   if (seconds < 2) {
     seconds = 2;
   } else {

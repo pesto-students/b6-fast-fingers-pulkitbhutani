@@ -7,6 +7,7 @@ import {
 import { DIFFICULTY_FACTOR_INCREASE_RATE } from "../utility/Constants";
 import useTimer from "./useTimer";
 import useScoreTimer from "./useScoreTimer";
+import { useHistory } from "react-router";
 
 function useGame(initialDifficulty, playerName) {
   const [difficulty, setDifficulty] = useState(initialDifficulty);
@@ -59,7 +60,6 @@ function useGame(initialDifficulty, playerName) {
         .then((userId) =>
           getScoreList(userId).then((data) => setScoreList(data))
         );
-
       console.log(scoreList);
       setResultMode(true);
       setStartScoreTimer(false);

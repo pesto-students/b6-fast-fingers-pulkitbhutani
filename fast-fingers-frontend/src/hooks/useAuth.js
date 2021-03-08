@@ -1,3 +1,4 @@
+import { signIn, signUp } from "../services/authService";
 
 function useAuth(
   username,
@@ -23,13 +24,7 @@ function useAuth(
     let data = { username: username, password: password };
     console.log(data);
     if (action === "register") {
-      fetch("http://localhost:3000/register", {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      signUp(data)
         .then((response) => {
           response.json();
           if (response.ok) {
@@ -37,8 +32,7 @@ function useAuth(
             setPasswordError("");
             setSucessFlag(true);
             setSucessMessage("User Registered Sucessfully.");
-          }
-          else {
+          } else {
             setUsernameError("UserName already Exists");
           }
         })
@@ -48,31 +42,25 @@ function useAuth(
     }
 
     if (action === "login") {
-        fetch("http://localhost:3000/login", {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+      signIn(data)
+        .then((response) => {
+          console.log(response);
+          response.json();
+          if (response.ok) {
+            setSucessFlag(true);
+            localStorage.setItem("username", data.username);
+            console.log("login good");
+            setUsernameError("");
+            setPasswordError("");
+            setSucessMessage("User details verified.");
+          } else {
+            setUsernameError("Incorrect Login Details");
+          }
         })
-          .then((response) => {
-              console.log(response);
-            response.json();
-            if (response.ok) {
-                setSucessFlag(true);
-                console.log('login good')
-              setUsernameError("");
-              setPasswordError("");
-              setSucessMessage("User details verified.");
-            }
-            else {
-              setUsernameError("Incorrect Login Details");
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
 
   return {

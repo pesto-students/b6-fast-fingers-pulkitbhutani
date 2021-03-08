@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import {signOut} from "../../services/authService";
 import Result from "../Result/Result";
 import ScoreList from "../ScoreList/ScoreList";
 import Header from "../Header/Header";
@@ -48,7 +49,7 @@ const Game = () => {
                 onClick={() => restartGame()}
               />
               <Link to="/">
-                <Button text={"QUIT"} />
+                <Button text={"QUIT"} onClick = {() => signOut()}/>
               </Link>
             </div>
           ) : (
