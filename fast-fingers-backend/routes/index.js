@@ -106,7 +106,6 @@ router.post('/register', function(req, res, next) {
 
       var scoreDetail={
         "userId" : req.body.userId,
-         "username":req.body.username,
          "score":req.body.score
        }
        

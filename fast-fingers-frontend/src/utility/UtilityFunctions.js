@@ -1,60 +1,52 @@
-import easyData from '../data/easy.json'
-import mediumData from '../data/medium.json'
-import hardData from '../data/hard.json'
-import {DIFFICULTY_LEVELS} from '../utility/Constants';
+import { DIFFICULTY_LEVELS } from "../utility/Constants";
 
-//const CorsURL = 'https://cors-anywhere.herokuapp.com/';
-
-
- /* export const loadNewWord = (difficultyLevel) => {
-    switch (difficultyLevel) {
-        case DIFFICULTY_LEVELS.EASY :
-            return easyData[Math.floor(Math.random() * easyData.length)].toUpperCase();
-        case DIFFICULTY_LEVELS.MEDIUM :
-            return mediumData[Math.floor(Math.random() * mediumData.length)].toUpperCase();
-        case DIFFICULTY_LEVELS.HARD :
-            return hardData[Math.floor(Math.random() * hardData.length)].toUpperCase();
-        default :
-            return easyData[Math.floor(Math.random() * easyData.length)].toUpperCase();
-    }
-    } */
-
-export const getDifficulty = (difficultyFactor)=>{
-  if(difficultyFactor >=2 ){
-      return DIFFICULTY_LEVELS.HARD;
-  }
-  else if(difficultyFactor >=1.5){
-      return DIFFICULTY_LEVELS.MEDIUM;
-  }
-  else return DIFFICULTY_LEVELS.EASY
-}
+export const getDifficulty = (difficultyFactor) => {
+  if (difficultyFactor >= 2) {
+    return DIFFICULTY_LEVELS.HARD;
+  } else if (difficultyFactor >= 1.5) {
+    return DIFFICULTY_LEVELS.MEDIUM;
+  } else return DIFFICULTY_LEVELS.EASY;
+};
 
 export const addZeroForSingleDigit = (num) => {
   return num < 10 ? "0" + num : num;
 };
 
-
 export const getTimerValue = (difficultyLevel, currentWord) => {
-  console.log('current length' + currentWord.length);
+  console.log("current length" + currentWord.length);
   let seconds = currentWord.length / difficultyLevel;
-  console.log('current length secs' + seconds);
+  console.log("current length secs" + seconds);
   if (seconds < 2) {
     seconds = 2;
   } else {
     seconds = Math.round(seconds);
   }
-  return seconds;
-}
-
+  return seconds - 1;
+};
 
 export const checkIfHighestScore = (score, scoreList) => {
-  const maxScore = Math.max.apply(Math, scoreList.map(function(o) { return o.score; }))
+  const maxScore = Math.max.apply(
+    Math,
+    scoreList.map(function (o) {
+      return o.score;
+    })
+  );
   if (maxScore === score) {
-    console.log('max score ' +maxScore);
+    console.log("max score " + maxScore);
     return true;
   } else return false;
-}
+};
 
+//Local Storage -
 
-  
-  
+export const savePlayerName = (playerName) =>
+  window.localStorage.setItem("player", playerName);
+
+export const getPlayerName = () =>
+  window.localStorage.getItem("player");
+
+export const setPlayerDifficultyLevel = (difficulty) =>
+  window.localStorage.setItem("difficulty", difficulty);
+
+export const getPlayerDifficultyLevel = (difficulty) =>
+  window.localStorage.getItem("difficulty", difficulty);

@@ -10,6 +10,8 @@ export const DIFFICULTY_LEVELS = {
   HARD : 'hard'
 };
 
+export const FASTFINGERS_API_URL = "http://localhost:3000";
+
 //Error Messages
 export const PLAYER_NAME_ERROR = "PLEASE ENTER YOUR NAME.";
 export const PASSWORD_ERROR = "PLEASE ENTER YOUR PASSWORD";

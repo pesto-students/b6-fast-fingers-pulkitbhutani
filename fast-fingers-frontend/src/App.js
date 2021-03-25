@@ -4,6 +4,7 @@ import "./App.css";
 import Game from "./components/Game/Game";
 import LandingPage from "./components/LandingPage/LandingPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
+import UserHomePage from "./components/UserHomePgae/UserHomePage";
 
 export default function App() {
 
@@ -16,6 +17,9 @@ export default function App() {
           </Route>
           <Route exact path="/register">
             <RegisterPage />
+          </Route>
+          <Route exact path="/user">
+            <UserHomePage />
           </Route>
           <Route path="/game/:playerName/:difficultyLevel">
             <Game/>

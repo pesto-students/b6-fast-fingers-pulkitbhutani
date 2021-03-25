@@ -19,7 +19,6 @@ const LandingPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const [difficultyLevel, setDifficultyLevel] = useState(1);
   const [usenameError, setUsernameError] = useState();
   const [passwordError, setPasswordError] = useState();
   const [sucessFlag, setSucessFlag] = useState(false);
@@ -30,7 +29,8 @@ const LandingPage = () => {
 
   useEffect(()=>{
     if(sucessFlag){
-      history.push(`game/${username}/${difficultyLevel}`)
+      history.push('/user');
+      //history.push(`game/${username}/${difficultyLevel}`)
     }
   },[sucessFlag])
 
@@ -50,17 +50,12 @@ const LandingPage = () => {
             <ErrorView errorText={error} />
             <PasswordInputBox password={password} setPassword={setPassword} placeHolder = 'Enter password' />
             <ErrorView errorText={error} />
-            <SelectBox
-              options={difficulties}
-              option={difficultyLevel}
-              setOption={setDifficultyLevel}
-            />
           </div>
         </div>
         <div> 
             <Button
               icon={playImg}
-              text={"LOGIN AND START GAME"}
+              text={"LOGIN"}
               onClick={()=>{onSubmit();}}
             />
           <ErrorView errorText={usenameError} />

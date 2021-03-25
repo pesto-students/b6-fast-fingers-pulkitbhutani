@@ -1,5 +1,6 @@
 import { signIn, signUp } from "../services/authService";
 import {PLAYER_NAME_ERROR, PASSWORD_ERROR, USER_EXISTS_ERROR, INCORRECT_LOGIN_DETAILS_ERROR, USER_REGISTERED_SUCESS} from "../utility/Constants";
+import {savePlayerName} from "../utility/UtilityFunctions";
 
 function useAuth(
   username,
@@ -49,7 +50,7 @@ function useAuth(
           response.json();
           if (response.ok) {
             setSucessFlag(true);
-            localStorage.setItem("username", data.username);
+            savePlayerName(data.username);
             console.log("login good");
             setUsernameError("");
             setPasswordError("");
