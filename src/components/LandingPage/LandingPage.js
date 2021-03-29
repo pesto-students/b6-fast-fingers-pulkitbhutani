@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import keyboardImg from "../../images/icons/keyboard.png";
 import playImg from "../../images/icons/play.png";
-import { difficulties, PLAYER_NAME_ERROR } from "../../utility/Constants";
+import { difficulties, PLAYER_NAME_ERROR } from "../../utility/constants";
 import Button from "../Button/Button";
 import TextBox from "../TextBox/TextBox";
 import ErrorView from "../ErrorView/ErrorView";

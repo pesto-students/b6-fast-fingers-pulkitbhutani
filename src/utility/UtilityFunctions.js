@@ -1,7 +1,7 @@
 import easyData from '../data/easy.json'
 import mediumData from '../data/medium.json'
 import hardData from '../data/hard.json'
-import {DIFFICULTY_LEVELS} from '../utility/Constants';
+import {DIFFICULTY_LEVELS} from '../utility/constants';
 
 
  export const loadNewWord = (difficultyLevel) => {

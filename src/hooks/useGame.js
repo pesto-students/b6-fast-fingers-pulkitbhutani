@@ -6,7 +6,7 @@ import {
 } from "../utility/UtilityFunctions";
 import {
   DIFFICULTY_FACTOR_INCREASE_RATE,
-} from "../utility/Constants";
+} from "../utility/constants";
 import useTimer from "./useTimer";
 import useScoreTimer from "./useScoreTimer";
 
