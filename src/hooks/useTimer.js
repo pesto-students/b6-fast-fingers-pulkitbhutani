@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
 function useTimer(value) {
+  console.log(value);
+  const displaySeconds = value-1;
+  const FULL_DASH_ARRAY = 283;
   const [startTimer, setStartTimer] = useState(false);
   const [restartTimer, setRestartTimer] = useState(false);
 
-  const [seconds, setSeconds] = useState(value);
+  const [seconds, setSeconds] = useState(displaySeconds);
   const [miliseconds, setMiliseconds] = useState(59);
 
   let timer = useRef(null);
+
   useEffect(() => {
     console.log("before start timer" + miliseconds);
     console.log("before start timer bool" + startTimer);
@@ -22,6 +26,8 @@ function useTimer(value) {
       clearInterval(timer.current);
       setStartTimer(false);
     }
+    console.log('timer', seconds);
+    setCircleDasharray();
   }, [seconds]);
 
   useEffect(() => {
@@ -38,6 +44,17 @@ function useTimer(value) {
     }
     setRestartTimer(false);
   }, [restartTimer, value]);
+
+     
+  // Update the dasharray value as time passes, starting with 283
+  function setCircleDasharray() {
+    const circleDasharray = `${(
+      (seconds/value)* FULL_DASH_ARRAY
+    ).toFixed(0)} 283`;
+    document
+      .getElementById("base-timer-path-remaining")
+      .setAttribute("stroke-dasharray", circleDasharray);
+  }
 
   return {
     seconds,

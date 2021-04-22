@@ -38,7 +38,7 @@ const LandingPage = () => {
       <form>
         <div>
           <div className="col align-self-center">
-            <TextBox text={playerName} setText={setPlayerName} />
+            <TextBox text={playerName} setText={setPlayerName} placeHolder = {'Enter Your Name'}/>
             <ErrorView errorText={error} />
             <SelectBox
               options={difficulties}
