@@ -1,0 +1,33 @@
+.person-icon {
+  max-width: 1.5rem;
+  max-height: 2rem;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.gamepad-icon {
+  max-width: 1.8rem;
+  max-height: 2rem;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.game-container {
+  margin-top: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.countdown-timer {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+
+.row-m-t-b{
+  margin-top : 40px;
+  margin-bottom : 20px;
+}
+
+
+

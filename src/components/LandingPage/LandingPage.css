@@ -1,0 +1,44 @@
+.img-keyboard {
+  width: 150px;
+  height: 100px;
+}
+
+.title-div {
+  margin-top: 7%;
+}
+
+.input-name {
+  width: 350px;
+  height: 50px;
+  opacity: 0.65;
+  padding-left: 22px; 
+  margin-top: 20px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.start-game-element {
+  margin: auto;
+  text-align: center;
+  align-content: center;
+  object-position: center;
+  vertical-align: middle;
+}
+
+.btn-start-game {
+  background-color: transparent;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  color: #ff5155;
+  padding-right: 20px;
+  margin-top: 30px;
+}
+
+.icon-play {
+  max-width: 4rem;
+  max-height: 4rem;
+  margin-right: 10px;
+}

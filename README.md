@@ -1,3 +1,5 @@
+Working Link - https://fast-fingers-pulkit-bhutani.netlify.app/
+
 # Fast Fingers
 
 Pesto Tech is proudly launching its own speed typing game named **Fast fingers**. You have been awarded with the project and you need to design and develop this project which should
@@ -70,7 +72,7 @@ UI design mocks are available in `design-mocks` folder
 | ![](design-mocks/3.png) | ![](design-mocks/4.png) |
 | ![](design-mocks/5.png) | ![](design-mocks/6.png) |
 
-[Adobe XD design link](https://drive.google.com/file/d/1qYhb8cNdXoBnD9rxoDcWF4DmTEpQX35n/view?usp=sharing)
+[Adobe XD design link](https://drive.google.com/file/d /1qYhb8cNdXoBnD9rxoDcWF4DmTEpQX35n/view?usp=sharing)
 
 [Zeplin web link](https://zpl.io/a710mxj)
 
