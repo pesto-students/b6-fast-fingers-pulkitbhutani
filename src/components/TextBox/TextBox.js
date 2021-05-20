@@ -1,7 +1,7 @@
 import React from "react";
 import "./TextBox.css";
 
-const TextBox = ({ text,setText }) => {
+const TextBox = ({ text,setText, placeHolder }) => {
 
 
   return (
@@ -9,6 +9,7 @@ const TextBox = ({ text,setText }) => {
             className="input-word"
             type="text"
             value={text} 
+            placeholder = {placeHolder}
             onChange={({target:{value}})=>setText(value.toUpperCase())} 
           />
   );
